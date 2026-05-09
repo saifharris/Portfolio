@@ -3,106 +3,99 @@ import { motion } from "framer-motion";
 
 const contactLinks = [
   {
-    label: "EMAIL",
+    label: "Email",
     value: "harrissaif01@gmail.com",
     href: "mailto:harrissaif01@gmail.com",
+    icon: "📧",
   },
   {
-    label: "LINKEDIN",
-    value: "/in/harris-saif-863a84246",
+    label: "LinkedIn",
+    value: "linkedin.com/in/harris-saif",
     href: "https://www.linkedin.com/in/harris-saif-863a84246/",
+    icon: "💼",
   },
   {
-    label: "PHONE",
+    label: "Phone",
     value: "+92 317 046 8116",
     href: "tel:+923170468116",
+    icon: "📱",
   },
-];
-
-const certifications = [
-  { name: "AWS Cloud Foundation", issuer: "AWS Academy", date: "May 2025" },
-  { name: "Microservices CI/CD Pipeline Builder", issuer: "AWS", date: "May 2025" },
 ];
 
 export function Contact() {
   return (
-    <section id="contact" className="py-32 relative overflow-hidden">
-      <div className="absolute inset-0 grid-bg opacity-60 pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_100%,rgba(91,91,214,0.08),transparent)] pointer-events-none" />
+    <section id="contact" className="relative py-20 lg:py-32 bg-gradient-to-br from-orange-50/50 via-white to-white overflow-hidden">
+      {/* Background Decoration */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-orange-100/40 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-tl from-orange-100/40 to-transparent rounded-full blur-3xl"></div>
+      </div>
 
-      <div className="max-w-4xl mx-auto px-6 relative">
-        {/* Heading */}
+      <div className="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-16 lg:mb-20"
         >
-          <div className="font-mono text-[10px] text-indigo-500 tracking-[0.35em] mb-6 font-semibold">
-            05 / CONTACT
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 border border-orange-200 mb-6">
+            <span className="text-2xl">🤝</span>
+            <span className="text-sm font-semibold text-orange-600">Let's Connect</span>
           </div>
-          <h2
-            className="font-bold leading-tight mb-6"
-            style={{ fontSize: "clamp(3rem, 10vw, 5.5rem)" }}
-          >
-            <span className="text-slate-900">{"LET'S"}</span>
-            <br />
-            <span className="gradient-text">CONNECT</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <span className="text-gray-900">Get In </span>
+            <span className="gradient-text">Touch</span>
           </h2>
-          <p className="text-slate-500 text-sm max-w-xs mx-auto leading-relaxed">
-            Open to full-time roles, interesting projects, or just a good
-            conversation about tech.
+          <div className="h-1 w-24 bg-gradient-to-r from-orange-500 to-orange-300 rounded-full mx-auto mb-6"></div>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Open to opportunities, collaborations, and interesting conversations about technology
           </p>
         </motion.div>
 
-        {/* Contact cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-14">
+        {/* Contact Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {contactLinks.map((link, i) => (
             <motion.a
               key={link.label}
               href={link.href}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="glass glass-hover p-6 text-center group"
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className="group"
             >
-              <div className="font-mono text-[9px] text-indigo-400 tracking-[0.35em] mb-2.5 font-semibold">
-                {link.label}
-              </div>
-              <div className="text-slate-600 text-xs group-hover:text-indigo-600 transition-colors break-all leading-relaxed">
-                {link.value}
+              <div className="h-full bg-white border-2 border-orange-100 rounded-2xl p-8 text-center hover:border-orange-300 hover:shadow-xl hover:shadow-orange-100/50 transition-all duration-300">
+                <div className="text-6xl mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                  {link.icon}
+                </div>
+                <h3 className="text-sm text-gray-500 mb-3 uppercase tracking-wider font-semibold">
+                  {link.label}
+                </h3>
+                <p className="text-gray-900 font-semibold text-lg break-all group-hover:text-orange-600 transition-colors">
+                  {link.value}
+                </p>
               </div>
             </motion.a>
           ))}
         </div>
 
-        {/* Certifications */}
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="mb-14"
+          className="text-center mb-16"
         >
-          <div className="font-mono text-[9px] text-slate-400 tracking-[0.35em] mb-5 text-center">
-            CERTIFICATIONS
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {certifications.map((cert) => (
-              <div key={cert.name} className="glass px-6 py-4 flex items-center gap-4">
-                <div className="w-1 h-8 bg-gradient-to-b from-indigo-500 to-violet-500 shrink-0 rounded-full" />
-                <div>
-                  <div className="text-slate-700 text-xs font-medium">{cert.name}</div>
-                  <div className="font-mono text-[10px] text-slate-400 mt-0.5">
-                    {cert.issuer} · {cert.date}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <a
+            href="mailto:harrissaif01@gmail.com"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-lg rounded-xl shadow-xl shadow-orange-200 hover:shadow-2xl hover:shadow-orange-300 hover:scale-105 transition-all duration-300"
+          >
+            <span>📬</span>
+            <span>Send Me a Message</span>
+          </a>
         </motion.div>
 
         {/* Footer */}
@@ -110,17 +103,14 @@ export function Contact() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="flex flex-wrap items-center justify-between gap-4 pt-8 border-t border-slate-200"
+          className="pt-12 border-t-2 border-orange-100 text-center"
         >
-          <div className="font-mono text-[10px] text-slate-400 tracking-widest">
-            HARRIS MAIZAN · SOFTWARE ENGINEER
-          </div>
-          <div className="font-mono text-[10px] text-slate-400 tracking-widest">
-            FAST NUCES · BS SE · 2021–2025
-          </div>
-          <div className="font-mono text-[10px] text-slate-400 tracking-widest">
-            ISLAMABAD, PK
-          </div>
+          <p className="text-gray-600 text-sm font-medium">
+            © {new Date().getFullYear()} Harris Maizan · Software Engineer · Built with Next.js & Three.js
+          </p>
+          <p className="text-gray-500 text-xs mt-2">
+            FAST NUCES · BS Software Engineering · 2021–2025
+          </p>
         </motion.div>
       </div>
     </section>

@@ -4,137 +4,128 @@ import { motion } from "framer-motion";
 const projects = [
   {
     name: "Fox Trax API Platform",
-    tag: "BACKEND · API",
     year: "2025",
-    desc: "Production .NET APIs serving 10,000+ clinicians. AI-powered provider assignment, scheduling, and visit management at enterprise scale.",
-    tech: ["ASP.NET", "SQL Server", "EF Core", "ADO.NET", ".NET Framework"],
-    wide: true,
-    accent: "indigo",
+    desc: "Production .NET APIs serving 10,000+ clinicians with AI-powered provider assignment and intelligent visit management system.",
+    tech: ["ASP.NET", "SQL Server", "EF Core", ".NET Framework"],
+    icon: "🦊",
+    featured: true,
   },
   {
     name: "Hidayah LMS",
-    tag: "FULL STACK",
     year: "2025",
-    desc: "Qur'an learning platform — lesson progression, instructor dashboards, student onboarding, and role-based access.",
+    desc: "Comprehensive Qur'an learning platform with lesson progression tracking, instructor dashboards, and role-based access control.",
     tech: ["Angular", "ASP.NET Core", "SQL Server", "TypeScript"],
-    wide: false,
-    accent: "violet",
+    icon: "📖",
+    featured: true,
   },
   {
     name: "AI Case Intelligence",
-    tag: "AI · ML",
     year: "2025",
-    desc: "Smart provider-to-case matching and intelligent case suggestions using LLM integration inside the Fox Trax ecosystem.",
-    tech: ["LLM Integration", ".NET", "SQL Server"],
-    wide: false,
-    accent: "sky",
+    desc: "Smart provider-to-case matching system using LLM integration for intelligent case suggestions and automated assignments.",
+    tech: ["LLM", ".NET", "SQL Server", "AI/ML"],
+    icon: "🧠",
+    featured: false,
   },
   {
     name: "CI/CD Pipeline Labs",
-    tag: "DEVOPS",
-    year: "2024–25",
-    desc: "Designed and taught containerized CI/CD pipelines covering GitHub Actions, Jenkins, Docker, and Kubernetes at FAST NUCES.",
+    year: "2024",
+    desc: "Educational containerized CI/CD pipelines covering modern DevOps practices including GitHub Actions, Jenkins, Docker, and Kubernetes.",
     tech: ["Docker", "Kubernetes", "GitHub Actions", "Jenkins"],
-    wide: false,
-    accent: "indigo",
+    icon: "⚡",
+    featured: false,
   },
 ];
 
-const accentMap = {
-  indigo: {
-    tag: "text-indigo-500",
-    heading: "group-hover:text-indigo-600",
-    tech: "border-indigo-100 text-indigo-500 bg-indigo-50",
-    glow: "bg-indigo-200",
-    border: "border-indigo-200/60",
-  },
-  violet: {
-    tag: "text-violet-500",
-    heading: "group-hover:text-violet-600",
-    tech: "border-violet-100 text-violet-500 bg-violet-50",
-    glow: "bg-violet-200",
-    border: "border-violet-200/60",
-  },
-  sky: {
-    tag: "text-sky-500",
-    heading: "group-hover:text-sky-600",
-    tech: "border-sky-100 text-sky-500 bg-sky-50",
-    glow: "bg-sky-200",
-    border: "border-sky-200/60",
-  },
-};
-
 export function Projects() {
   return (
-    <section id="projects" className="py-32 relative">
-      <div className="absolute left-0 top-1/3 w-[400px] h-[400px] rounded-full bg-indigo-100/50 blur-[100px] pointer-events-none" />
+    <section id="projects" className="relative py-20 lg:py-32 bg-white overflow-hidden">
+      {/* Background Decoration */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-orange-50 to-transparent rounded-full blur-3xl opacity-50"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-orange-50 to-transparent rounded-full blur-3xl opacity-50"></div>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="text-center mb-16 lg:mb-20"
         >
-          <div className="font-mono text-[10px] text-indigo-500 tracking-[0.35em] mb-3 font-semibold">
-            04 / PROJECTS
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 border border-orange-200 mb-6">
+            <span className="text-2xl">🎯</span>
+            <span className="text-sm font-semibold text-orange-600">Featured Work</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-5">
-            SELECTED WORK
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <span className="text-gray-900">Selected </span>
+            <span className="gradient-text">Projects</span>
           </h2>
-          <div className="neon-line w-20" />
+          <div className="h-1 w-24 bg-gradient-to-r from-orange-500 to-orange-300 rounded-full mx-auto mb-6"></div>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Crafting innovative solutions that make a real impact
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {projects.map((proj, i) => {
-            const a = accentMap[proj.accent as keyof typeof accentMap];
-            return (
-              <motion.div
-                key={proj.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.55 }}
-                className={`glass glass-hover p-7 relative group overflow-hidden flex flex-col ${
-                  proj.wide ? `lg:col-span-2 ${a.border}` : ""
-                }`}
-              >
-                {proj.wide && (
-                  <div
-                    className={`absolute -top-12 -right-12 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none ${a.glow}`}
-                  />
-                )}
-
-                <div className="flex items-start justify-between mb-4">
-                  <span className={`font-mono text-[9px] tracking-[0.3em] font-semibold ${a.tag}`}>
-                    {proj.tag}
-                  </span>
-                  <span className="font-mono text-[9px] text-slate-400">{proj.year}</span>
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((proj, i) => (
+            <motion.div
+              key={proj.name}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="group"
+            >
+              <div className="h-full bg-white border-2 border-orange-100 rounded-2xl p-8 hover:border-orange-300 hover:shadow-xl hover:shadow-orange-100/50 transition-all duration-300">
+                {/* Icon & Header */}
+                <div className="flex items-start justify-between mb-6">
+                  <div className="text-6xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                    {proj.icon}
+                  </div>
+                  <div className="text-right">
+                    {proj.featured && (
+                      <span className="inline-block px-3 py-1 rounded-full bg-orange-100 border border-orange-300 text-xs font-bold text-orange-600 mb-2">
+                        ⭐ Featured
+                      </span>
+                    )}
+                    <div className="text-sm text-gray-500 font-medium">{proj.year}</div>
+                  </div>
                 </div>
 
-                <h3
-                  className={`font-bold text-slate-800 mb-3 transition-colors duration-300 ${a.heading} ${
-                    proj.wide ? "text-xl" : "text-base"
-                  }`}
-                >
+                {/* Title */}
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors">
                   {proj.name}
                 </h3>
 
-                <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-1">{proj.desc}</p>
+                {/* Description */}
+                <p className="text-gray-600 leading-relaxed mb-6">
+                  {proj.desc}
+                </p>
 
-                <div className="flex flex-wrap gap-2">
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2 mb-6">
                   {proj.tech.map((t) => (
                     <span
                       key={t}
-                      className={`font-mono text-[9px] px-2.5 py-1 rounded border ${a.tech}`}
+                      className="px-3 py-1.5 rounded-lg bg-orange-50 border border-orange-200 text-xs font-medium text-gray-700 hover:bg-orange-100 hover:border-orange-300 transition-all"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
-              </motion.div>
-            );
-          })}
+
+                {/* View Link */}
+                <div className="flex items-center gap-2 text-orange-600 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span>View Details</span>
+                  <svg className="w-4 h-4 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

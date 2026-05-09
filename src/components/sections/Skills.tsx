@@ -1,170 +1,141 @@
 "use client";
 import { motion } from "framer-motion";
 
-const primarySkills = [
+const skillCategories = [
   {
-    name: ".NET / ASP.NET",
-    subtitle: "BACKEND CORE",
-    level: 90,
-    color: "indigo" as const,
-    desc: "Production-grade APIs on .NET Framework & .NET Core. ASP.NET Web API, EF Core, ADO.NET — shipped at scale for 10,000+ users at CareCloud.",
-    tags: ["ASP.NET Core", ".NET Framework", "EF Core", "ADO.NET", "Web API", "C#"],
+    title: "Backend Development",
+    icon: "⚙️",
+    skills: [
+      { name: ".NET Core", level: 95 },
+      { name: "ASP.NET", level: 93 },
+      { name: "C#", level: 92 },
+      { name: "EF Core", level: 90 },
+    ],
   },
   {
-    name: "ANGULAR",
-    subtitle: "FRONTEND CORE",
-    level: 85,
-    color: "violet" as const,
-    desc: "Reactive Angular apps with RxJS, component-driven architecture, and clean form handling — dashboards and learning platforms.",
-    tags: ["Angular 15+", "RxJS", "Reactive Forms", "TypeScript", "Angular Material"],
+    title: "Frontend Development",
+    icon: "🎨",
+    skills: [
+      { name: "Angular", level: 90 },
+      { name: "React", level: 85 },
+      { name: "TypeScript", level: 92 },
+      { name: "Next.js", level: 83 },
+    ],
+  },
+  {
+    title: "Database & DevOps",
+    icon: "🗄️",
+    skills: [
+      { name: "SQL Server", level: 88 },
+      { name: "Docker", level: 82 },
+      { name: "Kubernetes", level: 78 },
+      { name: "Azure DevOps", level: 80 },
+    ],
   },
 ];
-
-const otherSkills = [
-  { name: "React / Next.js", cat: "Frontend" },
-  { name: "TypeScript", cat: "Language" },
-  { name: "SQL Server", cat: "Database" },
-  { name: "Node.js", cat: "Backend" },
-  { name: "MongoDB", cat: "Database" },
-  { name: "Docker", cat: "DevOps" },
-  { name: "Kubernetes", cat: "DevOps" },
-  { name: "GitHub Actions", cat: "DevOps" },
-  { name: "Azure DevOps", cat: "DevOps" },
-  { name: "C++", cat: "Language" },
-  { name: "Python", cat: "Language" },
-  { name: "Postman / Swagger", cat: "Tooling" },
-];
-
-function PrimaryCard({
-  skill,
-  index,
-}: {
-  skill: (typeof primarySkills)[0];
-  index: number;
-}) {
-  const isIndigo = skill.color === "indigo";
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.15, duration: 0.65 }}
-      className="glass glass-hover p-8 relative overflow-hidden group"
-    >
-      {/* Corner glow */}
-      <div
-        className={`absolute -top-8 -right-8 w-48 h-48 rounded-full blur-3xl opacity-10 group-hover:opacity-18 transition-opacity pointer-events-none ${
-          isIndigo ? "bg-indigo-400" : "bg-violet-400"
-        }`}
-      />
-
-      <div
-        className={`font-mono text-[10px] tracking-[0.35em] mb-3 font-semibold ${
-          isIndigo ? "text-indigo-500" : "text-violet-500"
-        }`}
-      >
-        {skill.subtitle}
-      </div>
-
-      <h3 className="text-2xl font-bold text-slate-900 mb-3">{skill.name}</h3>
-
-      {/* Progress */}
-      <div className="flex items-center gap-3 mb-5">
-        <div className="flex-1 h-1 bg-slate-100 rounded-full overflow-hidden">
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: `${skill.level}%` }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 + index * 0.15, duration: 1.1, ease: "easeOut" }}
-            className={`h-full rounded-full ${
-              isIndigo
-                ? "bg-gradient-to-r from-indigo-500 to-indigo-400"
-                : "bg-gradient-to-r from-violet-500 to-violet-400"
-            }`}
-          />
-        </div>
-        <span
-          className={`font-mono text-xs shrink-0 font-semibold ${
-            isIndigo ? "text-indigo-500" : "text-violet-500"
-          }`}
-        >
-          {skill.level}%
-        </span>
-      </div>
-
-      <p className="text-slate-500 text-sm leading-relaxed mb-6">{skill.desc}</p>
-
-      <div className="flex flex-wrap gap-2">
-        {skill.tags.map((tag) => (
-          <span
-            key={tag}
-            className={`font-mono text-[10px] px-2.5 py-1 rounded border ${
-              isIndigo
-                ? "border-indigo-200 text-indigo-600 bg-indigo-50"
-                : "border-violet-200 text-violet-600 bg-violet-50"
-            }`}
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
 
 export function Skills() {
   return (
-    <section id="skills" className="py-32 relative">
-      <div className="absolute right-0 top-0 w-[500px] h-[500px] rounded-full bg-indigo-100/40 blur-[120px] pointer-events-none" />
+    <section id="skills" className="relative py-20 lg:py-32 bg-white overflow-hidden">
+      {/* Background Decoration */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-orange-50 to-transparent rounded-full blur-3xl opacity-50"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-orange-50 to-transparent rounded-full blur-3xl opacity-50"></div>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="text-center mb-16 lg:mb-20"
         >
-          <div className="font-mono text-[10px] text-indigo-500 tracking-[0.35em] mb-3 font-semibold">
-            02 / SKILLS
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 border border-orange-200 mb-6">
+            <span className="text-2xl">💡</span>
+            <span className="text-sm font-semibold text-orange-600">My Expertise</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-5">
-            TECH STACK
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <span className="text-gray-900">Technical </span>
+            <span className="gradient-text">Skills</span>
           </h2>
-          <div className="neon-line w-20" />
+          <div className="h-1 w-24 bg-gradient-to-r from-orange-500 to-orange-300 rounded-full mx-auto mb-6"></div>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Mastering modern technologies to build exceptional digital experiences
+          </p>
         </motion.div>
 
-        {/* Primary cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-          {primarySkills.map((skill, i) => (
-            <PrimaryCard key={skill.name} skill={skill} index={i} />
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skillCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: categoryIndex * 0.15, duration: 0.6 }}
+              className="group"
+            >
+              <div className="h-full bg-white border-2 border-orange-100 rounded-2xl p-8 hover:border-orange-300 hover:shadow-xl hover:shadow-orange-100/50 transition-all duration-300">
+                {/* Icon & Title */}
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="text-5xl transform group-hover:scale-110 transition-transform duration-300">
+                    {category.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    {category.title}
+                  </h3>
+                </div>
+
+                {/* Skills List */}
+                <div className="space-y-6">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div key={skill.name}>
+                      <div className="flex justify-between items-center mb-3">
+                        <span className="text-gray-700 font-semibold">{skill.name}</span>
+                        <span className="text-sm font-bold text-orange-600">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          viewport={{ once: true }}
+                          transition={{
+                            delay: categoryIndex * 0.15 + skillIndex * 0.1,
+                            duration: 1,
+                            ease: "easeOut"
+                          }}
+                          className="h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full relative"
+                        >
+                          <div className="absolute inset-0 bg-white/20"></div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Secondary grid */}
+        {/* Additional Skills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          className="mt-16 text-center"
         >
-          <div className="font-mono text-[10px] text-slate-400 tracking-[0.3em] mb-5">
-            ADDITIONAL SKILLS
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {otherSkills.map((skill, i) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.04 }}
-                className="glass glass-hover px-4 py-3 text-center group cursor-default"
+          <p className="text-gray-600 mb-6 font-medium">Also experienced with</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {["MongoDB", "Node.js", "Python", "GitHub Actions", "Jenkins", "Postman"].map((tech) => (
+              <span
+                key={tech}
+                className="px-5 py-2.5 rounded-lg bg-orange-50 border border-orange-200 text-sm font-medium text-gray-700 hover:bg-orange-100 hover:border-orange-300 hover:scale-105 transition-all duration-200"
               >
-                <div className="text-slate-600 text-xs font-medium mb-1 group-hover:text-indigo-600 transition-colors">
-                  {skill.name}
-                </div>
-                <div className="font-mono text-[9px] text-slate-400">{skill.cat}</div>
-              </motion.div>
+                {tech}
+              </span>
             ))}
           </div>
         </motion.div>
